@@ -1,0 +1,18 @@
+.container-delay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px); /* Adjust height minus navbar height */
+    padding-top: 20px;
+    background-color: #f8eda6; /* Light green background for the page */
+  }
+
+.delay-btn-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delay-btn-cont button {
+    margin: 0 10px; /* Adds space between the buttons */
+  }

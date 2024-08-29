@@ -1,0 +1,45 @@
+.container-path-one {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    width: 600px;
+    margin: 50px auto;
+  }
+
+  .box {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    position: relative;
+  }
+
+  .box::after {
+    content: '→'; /* Arrow character */
+    font-size: 36px;
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    transform: translateY(-50%);
+    color: #333;
+  }
+
+  /* Remove arrow from the last box */
+  .box:last-child::after {
+    display: none;
+  }
+
+  .button-container{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .button{
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }

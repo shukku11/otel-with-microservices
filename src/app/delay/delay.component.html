@@ -1,0 +1,15 @@
+<div class="container-delay">
+    <div class="message-box">
+      <h1>Simulate Delay</h1>
+      <p>This is created to simulate delay.</p>
+      <div [class.wait-cursor]="isLoading | async">
+        <div class="delay-btn-cont">
+            <button (click)="delay_simulate()">Click Me</button>
+        </div>
+        <div *ngIf="responseFromApi!== undefined && responseFromApi.length > 0" style="margin-top: 10px;">
+          <hr>
+          <p >{{responseFromApi}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
