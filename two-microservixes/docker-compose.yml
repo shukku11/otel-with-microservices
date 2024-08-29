@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  service_ui:
+    build: ./service_ui
+    ports:
+      - "8002:8002"
+    depends_on:
+      - service_a
+      - service_b
+      - otel-collector
+
+  service_a:
+    build: ./service_a
+    ports:
+      - "8001:8001"
+    depends_on:
+      - service_b
+      - otel-collector
+
+  service_b:
+    build: ./service_b
+    ports:
+      - "8000:8000"
+    depends_on:
+      - service_c
+      - otel-collector
+  
+  service_c:
+    build: ./service_c
+    ports:
+      - "8003:8003"
+    depends_on:
+      - otel-collector
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "16686:16686"  # Jaeger's UI
+      - "14250:14250"  # gRPC for receiving traces
+      - "6831:6831/udp"  # UDP for receiving traces
+      - "6832:6832/udp"
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
+    command: ["--config=/etc/otel-collector-config.yml"]
+    volumes:
+      - ./otel-collector-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - "4317:4317"  # gRPC for receiving OTLP traces
+      - "4318:4318"  # HTTP for receiving OTLP traces
+    depends_on:
+      - jaeger
